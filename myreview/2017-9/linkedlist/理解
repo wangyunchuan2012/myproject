@@ -1,0 +1,6 @@
+链表（linked list）是一组数据项的集合，其中每个数据项都是一个节点的一部分，每个节点还包含指向下一个节点的链接.
+
+链表增加一项直接是将a.next = add; add.next = b
+
+删除中间的一项是直接将index-1.next = index.next.next
+
