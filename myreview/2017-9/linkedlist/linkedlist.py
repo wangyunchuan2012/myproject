@@ -177,7 +177,6 @@ class Linkedlist:
         else:
             return 0
 
-
     def clear(self):
         """
         清空链表
@@ -187,13 +186,82 @@ class Linkedlist:
         self.length = 0
         print('clear the linked list finished!')
 
+    def findkthtotail(self, k):
+        """
+        找出链表中倒数第K个元素
+        :param k: 倒数第k个
+        :return: element
+        """
+        if type(k) is int:
+            if k > self.length or k < 0:
+                print('k is out of range!')
+                return
+            else:
+                p1 = self.head
+                p2 = self.head
+                for i in range(k-1):         # 将p1往后移动k-1步
+                    if p1.pnext:
+                        p1 = p1.pnext
+                    else:
+                        return p1.pnext
+                while p1.pnext:
+                    p1 = p1.pnext
+                    p2 = p2.pnext
+        else:
+            print('k is not int!')
+        return p2.data
+
+    def delete_repeat_data(self):
+        """
+        删除链表中的重复数据
+        :return: None
+        """
+        current_node = self.head
+        pre = Node(None)
+        ele_list = []
+        while current_node is not None:
+            if current_node.data not in ele_list:
+                pre = current_node
+                ele_list.append(current_node.data)
+            else:
+                pre.pnext = current_node.pnext
+            current_node = current_node.pnext
+        return ele_list
+
+    # def reversed_linkedlist(self):
+    #     """
+    #     反转链表
+    #     :return:
+    #     """
+    #     current_node = self.head
+    #     reversed_head = self.head
+    #     preNode = Node(None)
+    #     while current_node.pnext is not None:
+    #         nextNode = current_node.pnext
+    #         if nextNode is None:
+    #             reversed_head = current_node
+    #         current_node.pnext = preNode
+    #         preNode = current_node
+    #         current_node = nextNode
+    #         current_node = current_node.pnext
+    #     self.head = reversed_head
+    #     print(reversed_head)
+    #     return
+
+
 
 if __name__ == '__main__':
     node1 = Node(data='node1')
     node2 = Node(data='node2')
+    node3 = Node(data='node2')
+    node4 = Node(data='node3')
+    node5 = Node(data='node3')
     linked_list = Linkedlist()
     linked_list.append(node1)
     linked_list.append(node2)
+    linked_list.append(node3)
+    linked_list.append(node4)
+    linked_list.append(node5)
     linked_list.print_linked_list()
     linked_list.insert('abc', 2)
     linked_list.insert('bde', 0)
@@ -204,3 +272,9 @@ if __name__ == '__main__':
     linked_list.print_linked_list()
     print(linked_list.get_value(index=2))
     print(linked_list.get_length())
+    print(linked_list.findkthtotail(2))
+    print(linked_list.findkthtotail(3))
+    ele = linked_list.delete_repeat_data()
+    print(ele)
+    linked_list.print_linked_list()
+    print(linked_list.reversed_linkedlist())
